@@ -15,7 +15,7 @@ function GetData() {
         {name}
         {/* {currency}: {rate} */}
       </p>
-      <img src={image} />
+      <img alt='' src={image} />
     </div>
   ));
 }

@@ -2,7 +2,6 @@ import logo from "./logo.svg";
 import "./App.css";
 import GetAllPokemonQuery from "./constants/graphql-queries";
 import { useQuery } from "@apollo/client";
-import { Button } from "./stories/Button/Button";
 
 function GetData() {
   const { loading, error, data } = useQuery(GetAllPokemonQuery);

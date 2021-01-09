@@ -33,3 +33,4 @@ jobs:
     - name: Yarn test
       working-directory: ./pokemon-dex-battle-app
       run: yarn test
+      if: ${{ false }} #temporarily disabled

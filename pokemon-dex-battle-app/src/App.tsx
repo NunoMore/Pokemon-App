@@ -9,13 +9,10 @@ function GetData() {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
-  return data.pokemons.map(({ name, image }) => (
+  return data.pokemons.map(({ name, image }: any) => (
     <div key={name}>
-      <p>
-        {name}
-        {/* {currency}: {rate} */}
-      </p>
-      <img alt='' src={image} />
+      <p>{name}</p>
+      <img alt="" src={image} />
     </div>
   ));
 }

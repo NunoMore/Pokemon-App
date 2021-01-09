@@ -11,29 +11,18 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-
+  install-build-test:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [15.x]
-        project-path: [pokemon-dex-battle-app]
-
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js  15.x
       uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node-version }}
-    - run: cd ${{ matrix.project-path }}
+        node-version:  15.x
       
-    - uses: borales/actions-yarn@v2.0.0
-      with:
-        cmd: install # will run `yarn install` command
-    - uses: borales/actions-yarn@v2.0.0
-      with:
-        cmd: build # will run `yarn build` command
-    - uses: borales/actions-yarn@v2.0.0
-      with:
-        cmd: test # will run `yarn test` command
+    - name: Yarn install
+      working-directory: ./pokemon-dex-battle-app
+      run: |
+        yarn install
+        yarn build
+        yarn test

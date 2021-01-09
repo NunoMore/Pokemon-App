@@ -14,7 +14,9 @@ jobs:
   install-build-test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
+      
     - name: Use Node.js  15.x
       uses: actions/setup-node@v1
       with:
@@ -22,7 +24,12 @@ jobs:
       
     - name: Yarn install
       working-directory: ./pokemon-dex-battle-app
-      run: |
-        yarn install
-        yarn build
-        yarn test
+      run: yarn install
+      
+    - name: Yarn build
+      working-directory: ./pokemon-dex-battle-app
+      run: yarn build
+      
+    - name: Yarn test
+      working-directory: ./pokemon-dex-battle-app
+      run: yarn test

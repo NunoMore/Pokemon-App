@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  install-build-test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      
+    - name: Use Node.js 15.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 15.x
+      
+    - name: Yarn install
+      working-directory: ./pokemon-dex-battle-app
+      run: yarn install
+      
+    - name: Yarn build
+      working-directory: ./pokemon-dex-battle-app
+      run: yarn build
+      
+    - name: Yarn test
+      working-directory: ./pokemon-dex-battle-app
+      run: yarn test

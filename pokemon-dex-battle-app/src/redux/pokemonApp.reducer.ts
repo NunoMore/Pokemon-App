@@ -2,7 +2,7 @@ import { createAction, createReducer, PayloadAction } from "@reduxjs/toolkit";
 import { Pokemon } from "./../graphQL/graphql-types";
 
 export interface IPokemonAppState {
-  pokemons: Pokemon[];
+  allPokemon: Pokemon[];
   filteredPokemon: Pokemon[];
   selectedPokemon: Pokemon;
   loading: boolean;
@@ -13,7 +13,7 @@ export const PokemonAppInitialState: IPokemonAppState = {
   error: null,
   loading: false,
   filteredPokemon: [],
-  pokemons: [],
+  allPokemon: [],
   selectedPokemon: {
     name: "",
     image: "",
@@ -62,12 +62,16 @@ export const PokemonAppReducer = createReducer(PokemonAppInitialState, {
     state: IPokemonAppState,
     action: PayloadAction<string>
   ) => {
-    state.filteredPokemon = state.pokemons.filter(
-      (p) =>
-        p.name.toLocaleLowerCase().includes(action.payload) ||
-        p.types.filter((t) => t.toLocaleLowerCase().includes(action.payload))
-          .length > 0
-    );
+    state.filteredPokemon =
+      action.payload === ""
+        ? state.allPokemon
+        : state.allPokemon.filter(
+            (p) =>
+              p.name.toLocaleLowerCase().includes(action.payload) ||
+              p.types.filter((t) =>
+                t.toLocaleLowerCase().includes(action.payload)
+              ).length > 0
+          );
   },
   [PokemonAppActions.setError.type]: (
     state: IPokemonAppState,
@@ -85,6 +89,7 @@ export const PokemonAppReducer = createReducer(PokemonAppInitialState, {
     state: IPokemonAppState,
     action: PayloadAction<Pokemon[]>
   ) => {
-    state.pokemons = action.payload;
+    state.allPokemon = action.payload;
+    state.filteredPokemon = action.payload;
   },
 });

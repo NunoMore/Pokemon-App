@@ -5,10 +5,12 @@ import "./search.css";
  */
 export const SearchBar = ({ filterAction }) => {
   return (
-    <input
-      id="searchInput"
-      placeholder={"search"}
-      onChange={(e) => filterAction(e.target.value)}
-    />
+    <div id='searchDiv'>
+      <input
+        id="searchInput"
+        placeholder={"search"}
+        onChange={(e) => filterAction(e.target.value)}
+      />
+    </div>
   );
 };

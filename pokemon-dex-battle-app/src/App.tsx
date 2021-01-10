@@ -11,14 +11,18 @@ import { SearchBar } from "./stories/Search/Search";
 
 function App() {
   const dispatch = useDispatch();
-  const pokemons: Pokemon[] = useSelector(
-    (state: IStoreState) => state.pokemonAppState.pokemons
+  const allPokemon: Pokemon[] = useSelector(
+    (state: IStoreState) => state.pokemonAppState.allPokemon
   );
+  const filteredPokemon: Pokemon[] = useSelector(
+    (state: IStoreState) => state.pokemonAppState.filteredPokemon
+  );
+
   const { loading, error, data } = useQuery(GetAllPokemonQuery);
   dispatch(PokemonAppActions.loading(loading));
   if (error) {
     dispatch(PokemonAppActions.setError(error));
-  } else if (!loading) {
+  } else if (!loading && allPokemon.length === 0) {
     dispatch(PokemonAppActions.setAllPokemon(data.pokemons));
   }
 
@@ -30,7 +34,7 @@ function App() {
       <Header />
       <SearchBar filterAction={filterAction} />
       <div className="grid">
-        {pokemons.map((pokemon: Pokemon) => {
+        {filteredPokemon.map((pokemon: Pokemon) => {
           return <View detailed={false} pokemonInfo={pokemon} />;
         })}
       </div>

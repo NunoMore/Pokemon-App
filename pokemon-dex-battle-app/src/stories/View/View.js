@@ -132,6 +132,7 @@ export const View = ({ detailed, pokemonInfo }) => {
       className={type}
       style={{
         maxWidth: detailed ? "100%" : "200px",
+        maxHeight: detailed ? "100%" : "250px",
         backgroundImage: "url(" + srcLink + ")",
       }}
     >

@@ -11,9 +11,9 @@ button {
   vertical-align: middle;
 }
 
-img {
+#buttonImg {
   padding-right: 5px;
-  width: 20px;
+  width: 20%;
 }
 
 .Bug {

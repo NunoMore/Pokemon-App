@@ -136,7 +136,7 @@ export const View = ({ detailed, pokemonInfo }) => {
       }}
     >
       {detailed && <p>{pokemonInfo.name}</p>}
-      <img alt="Pokemon" src={pokemonInfo.image} />
+      <img id='pokeImg' alt="Pokemon" src={pokemonInfo.image} />
       {!detailed && <p>{pokemonInfo.name}</p>}
       {detailed && <div id="detailedView">{details}</div>}
     </div>

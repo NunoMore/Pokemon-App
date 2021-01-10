@@ -4,7 +4,7 @@ import "./button.css";
 /**
  * Button component
  */
-export const Button = ({ type, onClick, label, ...props }) => {
+export const Button = ({ type, onClick, label }) => {
   let srcLink = "";
   switch (type) {
     case "Bug":
@@ -85,8 +85,8 @@ export const Button = ({ type, onClick, label, ...props }) => {
   }
 
   return (
-    <button type="button" onClick={onClick} className={type} {...props}>
-      {type && <img alt="Icon" src={srcLink} />}
+    <button type="button" onClick={onClick} className={type}>
+      {type && <img id='buttonImg' alt="Icon" src={srcLink} />}
       {label}
     </button>
   );

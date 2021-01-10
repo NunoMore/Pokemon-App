@@ -6,63 +6,63 @@ import "./view.css";
  */
 export const View = ({ detailed, pokemonInfo }) => {
   const type = pokemonInfo.types[0];
-  let srcLink = ""; // todo : change links to backgrounds :-D
+  let srcLink = "";
   switch (type) {
     case "Bug":
       srcLink =
-        "https://static.wikia.nocookie.net/pokemongo/images/7/7d/Bug.png/revision/latest/scale-to-width-down/62?cb=20161013132753";
+        "https://static.wikia.nocookie.net/pokemongo/images/0/05/Type_Background_Bug.png/revision/latest/scale-to-width-down/62?cb=20171026003543";
       break;
     case "Dark":
       srcLink =
-        "https://static.wikia.nocookie.net/pokemongo/images/0/0e/Dark.png/revision/latest/scale-to-width-down/62?cb=20161013132800";
+        "https://static.wikia.nocookie.net/pokemongo/images/f/f5/Type_Background_Dark.png/revision/latest/scale-to-width-down/62?cb=20171026003554";
       break;
     case "Dragon":
       srcLink =
-        "https://static.wikia.nocookie.net/pokemongo/images/c/c7/Dragon.png/revision/latest/scale-to-width-down/62?cb=20161013132807";
+        "https://static.wikia.nocookie.net/pokemongo/images/2/28/Type_Background_Dragon.png/revision/latest/scale-to-width-down/62?cb=20171026003601";
       break;
     case "Electric":
       srcLink =
-        "https://static.wikia.nocookie.net/pokemongo/images/2/2f/Electric.png/revision/latest/scale-to-width-down/62?cb=20161013132813";
+        "https://static.wikia.nocookie.net/pokemongo/images/6/6c/Type_Background_Electric.png/revision/latest/scale-to-width-down/62?cb=20171026003611";
       break;
     case "Fairy":
       srcLink =
-        "https://static.wikia.nocookie.net/pokemongo/images/4/43/Fairy.png/revision/latest/scale-to-width-down/62?cb=20161013132820";
+        "https://static.wikia.nocookie.net/pokemongo/images/1/19/Type_Background_Fairy.png/revision/latest/scale-to-width-down/62?cb=20171026003635";
       break;
     case "Fighting":
       srcLink =
-        "https://static.wikia.nocookie.net/pokemongo/images/3/30/Fighting.png/revision/latest/scale-to-width-down/62?cb=20161013132827";
+        "https://static.wikia.nocookie.net/pokemongo/images/1/17/Type_Background_Fighting.png/revision/latest/scale-to-width-down/62?cb=20171026003644";
       break;
     case "Fire":
       srcLink =
-        "https://static.wikia.nocookie.net/pokemongo/images/3/30/Fire.png/revision/latest/scale-to-width-down/62?cb=20161013132833";
+        "https://static.wikia.nocookie.net/pokemongo/images/6/64/Type_Background_Fire.png/revision/latest/scale-to-width-down/62?cb=20171026003653";
       break;
     case "Flying":
       srcLink =
-        "https://static.wikia.nocookie.net/pokemongo/images/7/7f/Flying.png/revision/latest/scale-to-width-down/62?cb=20161013132839";
+        "https://static.wikia.nocookie.net/pokemongo/images/6/65/Type_Background_Flying.png/revision/latest/scale-to-width-down/62?cb=20171026004151";
       break;
     case "Ghost":
       srcLink =
-        "https://static.wikia.nocookie.net/pokemongo/images/a/ab/Ghost.png/revision/latest/scale-to-width-down/62?cb=20161013132847";
+        "https://static.wikia.nocookie.net/pokemongo/images/4/44/Type_Background_Ghost.png/revision/latest/scale-to-width-down/62?cb=20171026003713";
       break;
     case "Grass":
       srcLink =
-        "https://static.wikia.nocookie.net/pokemongo/images/c/c5/Grass.png/revision/latest/scale-to-width-down/62?cb=20161013132855";
+        "https://static.wikia.nocookie.net/pokemongo/images/9/92/Type_Background_Grass.png/revision/latest/scale-to-width-down/62?cb=20171026003722";
       break;
     case "Ground":
       srcLink =
-        "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png/revision/latest/scale-to-width-down/62?cb=20161013132902";
+        "https://static.wikia.nocookie.net/pokemongo/images/a/a3/Type_Background_Ground.png/revision/latest/scale-to-width-down/62?cb=20171026003731";
       break;
     case "Ice":
       srcLink =
-        "https://static.wikia.nocookie.net/pokemongo/images/7/77/Ice.png/revision/latest/scale-to-width-down/62?cb=20161013132908";
+        "https://static.wikia.nocookie.net/pokemongo/images/8/85/Type_Background_Ice.png/revision/latest/scale-to-width-down/62?cb=20171026003739";
       break;
     case "Normal":
       srcLink =
-        "https://static.wikia.nocookie.net/pokemongo/images/f/fb/Normal.png/revision/latest/scale-to-width-down/62?cb=20161013132914";
+        "https://static.wikia.nocookie.net/pokemongo/images/f/f6/Type_Background_Normal.png/revision/latest/scale-to-width-down/62?cb=20171026003751";
       break;
     case "Poison":
       srcLink =
-        "https://static.wikia.nocookie.net/pokemongo/images/0/05/Poison.png/revision/latest/scale-to-width-down/62?cb=20161013133014";
+        "https://static.wikia.nocookie.net/pokemongo/images/d/db/Type_Background_Poison.png/revision/latest/scale-to-width-down/62?cb=20171026003759";
       break;
     case "Psychic":
       srcLink =
@@ -70,15 +70,15 @@ export const View = ({ detailed, pokemonInfo }) => {
       break;
     case "Rock":
       srcLink =
-        "https://static.wikia.nocookie.net/pokemongo/images/0/0b/Rock.png/revision/latest/scale-to-width-down/62?cb=20161013133022";
+        "https://static.wikia.nocookie.net/pokemongo/images/5/5d/Type_Background_Rock.png/revision/latest/scale-to-width-down/62?cb=20171026003823";
       break;
     case "Steel":
       srcLink =
-        "https://static.wikia.nocookie.net/pokemongo/images/c/c9/Steel.png/revision/latest/scale-to-width-down/62?cb=20161013133029";
+        "https://static.wikia.nocookie.net/pokemongo/images/3/30/Type_Background_Steel.png/revision/latest/scale-to-width-down/62?cb=20171026003833";
       break;
     case "Water":
       srcLink =
-        "https://static.wikia.nocookie.net/pokemongo/images/9/9d/Water.png/revision/latest/scale-to-width-down/62?cb=20161013133222";
+        "https://static.wikia.nocookie.net/pokemongo/images/d/d2/Type_Background_Water.png/revision/latest/scale-to-width-down/62?cb=20171026003849";
       break;
     default:
       srcLink = "";
@@ -86,49 +86,52 @@ export const View = ({ detailed, pokemonInfo }) => {
   }
 
   const details = [];
-  Object.keys(pokemonInfo).map((entry) => {
-    if (entry && entry !== "name" && entry !== "image") {
-      const entryObj = pokemonInfo[entry];
-      if (typeof entryObj === "object") {
-        details.push(<h3>{entry + " :"}</h3>);
-        Object.keys(entryObj).map((subEntry) => {
-          const subEntryObj = entryObj[subEntry];
-          if (typeof subEntryObj === "object") {
-            details.push(<h4>{subEntry + " :"}</h4>);
-            Object.keys(subEntryObj).map((subSubEntry) => {
-              const subSubEntryObj = subEntryObj[subSubEntry];
-              if (typeof subSubEntryObj === "object") {
-                details.push(<h5>{subSubEntry + " :"}</h5>);
-
-                Object.keys(subSubEntryObj).map((subSubSubEntry) => {
+  if (detailed && pokemonInfo && typeof pokemonInfo === "object") {
+    Object.keys(pokemonInfo).forEach((entry) => {
+      if (entry && entry !== "name" && entry !== "image") {
+        const entryObj = pokemonInfo[entry];
+        if (entryObj && typeof entryObj === "object") {
+          details.push(<h3>{entry + " :"}</h3>);
+          Object.keys(entryObj).forEach((subEntry) => {
+            const subEntryObj = entryObj[subEntry];
+            if (subEntryObj && typeof subEntryObj === "object") {
+              details.push(<h4>{subEntry + " :"}</h4>);
+              Object.keys(subEntryObj).forEach((subSubEntry) => {
+                const subSubEntryObj = subEntryObj[subSubEntry];
+                if (subSubEntryObj && typeof subSubEntryObj === "object") {
+                  details.push(<h5>{subSubEntry + " :"}</h5>);
+                  Object.keys(subSubEntryObj).forEach((subSubSubEntry) => {
+                    details.push(
+                      <h6>
+                        {subSubSubEntry +
+                          " : " +
+                          subSubEntryObj[subSubSubEntry]}
+                      </h6>
+                    );
+                  });
+                } else {
                   details.push(
-                    <h6>
-                      {subSubSubEntry + " : " + subSubEntryObj[subSubSubEntry]}
-                    </h6>
+                    <h5>{subSubEntry + " : " + subSubEntryObj[subSubEntry]}</h5>
                   );
-                });
-              } else {
-                details.push(
-                  <h5>{subSubEntry + " : " + subEntryObj[subSubEntry]}</h5>
-                );
-              }
-            });
-          } else {
-            details.push(<h4>{subEntry + " : " + entryObj[subEntry]}</h4>);
-          }
-        });
-      } else {
-        details.push(<h3>{entry + " : " + entryObj[entry]}</h3>);
+                }
+              });
+            } else {
+              details.push(<h4>{subEntry + " : " + subEntryObj[subEntry]}</h4>);
+            }
+          });
+        } else {
+          details.push(<h3>{entry + " : " + entryObj[entry]}</h3>);
+        }
       }
-    }
-  });
+    });
+  }
 
   return (
     <div
       id="viewDiv"
       className={type}
       style={{
-        maxWidth: detailed ? "100%" : "200px",
+        maxWidth: detailed ? "100%" : "20%",
         backgroundImage: "url(" + srcLink + ")",
       }}
     >

@@ -28,7 +28,7 @@ export const PokemonAppInitialState: IPokemonAppState = {
 };
 
 export const PokemonAppActionTypes = {
-  SET_ALL_POKEMON: "GET_ALL_POKEMON",
+  SET_ALL_POKEMON: "SET_ALL_POKEMON",
   LOADING: "LOADING",
   SET_ERROR: "SET_ERROR",
 };
@@ -37,12 +37,9 @@ export const PokemonAppActions = {
   loading: createAction(PokemonAppActionTypes.LOADING, (loading: boolean) => {
     return { payload: loading };
   }),
-  setError: createAction(
-    PokemonAppActionTypes.SET_ERROR,
-    (error: any) => {
-      return { payload: error };
-    }
-  ),
+  setError: createAction(PokemonAppActionTypes.SET_ERROR, (error: any) => {
+    return { payload: error };
+  }),
   setAllPokemon: createAction(
     PokemonAppActionTypes.SET_ALL_POKEMON,
     (pokemons: Pokemon[]) => {

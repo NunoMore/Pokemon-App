@@ -4,6 +4,8 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import { store } from "./redux/store";
+import { Provider } from "react-redux";
 
 const client = new ApolloClient({
   uri: "https://graphql-pokemon2.vercel.app/",
@@ -12,9 +14,11 @@ const client = new ApolloClient({
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    <Provider store={store}>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </Provider>
   </ApolloProvider>,
   document.getElementById("root")
 );

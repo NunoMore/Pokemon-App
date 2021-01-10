@@ -1,23 +1,16 @@
 import logo from "./logo.svg";
 import "./App.css";
-import GetAllPokemonQuery from "./constants/graphql-queries";
-import { useQuery } from "@apollo/client";
-
-function GetData() {
-  const { loading, error, data } = useQuery(GetAllPokemonQuery);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
-
-  return data.pokemons.map(({ name, image }: any) => (
-    <div key={name}>
-      <p>{name}</p>
-      <img alt="" src={image} />
-    </div>
-  ));
-}
+import { Pokemon } from "./graphQL/graphql-types";
+import { useSelector } from "react-redux";
+import { IStoreState } from "./redux/store";
+import { GetPokemons } from "./graphQL/graphql-queries";
 
 function App() {
+  GetPokemons();
+  const pokemons: Pokemon[] = useSelector(
+    (state: IStoreState) => state.pokemonAppState.pokemons
+  );
+
   return (
     <div className="App">
       <header className="App-header">
@@ -25,7 +18,9 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        {GetData()}
+        {pokemons.forEach((pokemon: Pokemon) => {
+          <p>{pokemon.name}</p>;
+        })}
         <a
           className="App-link"
           href="https://reactjs.org"

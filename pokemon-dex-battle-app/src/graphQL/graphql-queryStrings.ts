@@ -3,26 +3,15 @@ import { gql } from "@apollo/client";
 export const GetAllPokemonQuery = gql`
   {
     pokemons(first: 151) {
-      id
       name
-      maxCP
+      maxHP
+      image
+      weaknesses
+      types
+      resistant
       evolutions {
         name
-      }
-      evolutionRequirements {
-        name
-        amount
-      }
-      classification
-      image
-      fleeRate
-      weight {
-        minimum
-        maximum
-      }
-      height {
-        minimum
-        maximum
+        image
       }
       attacks {
         fast {

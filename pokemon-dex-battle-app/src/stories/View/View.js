@@ -85,18 +85,57 @@ export const View = ({ detailed, pokemonInfo }) => {
       break;
   }
 
+  const details = [];
+  Object.keys(pokemonInfo).map((entry) => {
+    if (entry && entry !== "name" && entry !== "image") {
+      const entryObj = pokemonInfo[entry];
+      if (typeof entryObj === "object") {
+        details.push(<h3>{entry + " :"}</h3>);
+        Object.keys(entryObj).map((subEntry) => {
+          const subEntryObj = entryObj[subEntry];
+          if (typeof subEntryObj === "object") {
+            details.push(<h4>{subEntry + " :"}</h4>);
+            Object.keys(subEntryObj).map((subSubEntry) => {
+              const subSubEntryObj = subEntryObj[subSubEntry];
+              if (typeof subSubEntryObj === "object") {
+                details.push(<h5>{subSubEntry + " :"}</h5>);
+
+                Object.keys(subSubEntryObj).map((subSubSubEntry) => {
+                  details.push(
+                    <h6>
+                      {subSubSubEntry + " : " + subSubEntryObj[subSubSubEntry]}
+                    </h6>
+                  );
+                });
+              } else {
+                details.push(
+                  <h5>{subSubEntry + " : " + subEntryObj[subSubEntry]}</h5>
+                );
+              }
+            });
+          } else {
+            details.push(<h4>{subEntry + " : " + entryObj[subEntry]}</h4>);
+          }
+        });
+      } else {
+        details.push(<h3>{entry + " : " + entryObj[entry]}</h3>);
+      }
+    }
+  });
+
   return (
     <div
       id="viewDiv"
+      className={type}
       style={{
         maxWidth: detailed ? "100%" : "200px",
         backgroundImage: "url(" + srcLink + ")",
       }}
     >
-      {detailed && <p className={type}>{pokemonInfo.name}</p>}
+      {detailed && <p>{pokemonInfo.name}</p>}
       <img alt="Pokemon" src={pokemonInfo.image} />
-      {!detailed && <p className={type}>{pokemonInfo.name}</p>}
-      {detailed && <div></div>}
+      {!detailed && <p>{pokemonInfo.name}</p>}
+      {detailed && <div id="detailedView">{details}</div>}
     </div>
   );
 };

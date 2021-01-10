@@ -2,6 +2,10 @@
   background-size: cover;
 }
 
+#detailedView {
+  text-align: left;
+}
+
 img {
   width: 80%;
   padding-right: 10%;

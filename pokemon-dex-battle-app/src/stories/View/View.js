@@ -4,7 +4,7 @@ import "./view.css";
 /**
  * View component
  */
-export const View = ({ detailed, type, pokemonInfo, ...props }) => {
+export const View = ({ detailed, type, pokemonInfo }) => {
   let srcLink = ""; // todo : change links to backgrounds :-D
   switch (type) {
     case "Bug":
@@ -65,7 +65,7 @@ export const View = ({ detailed, type, pokemonInfo, ...props }) => {
       break;
     case "Psychic":
       srcLink =
-        "https://static.wikia.nocookie.net/pokemongo/images/2/21/Psychic.png/revision/latest/scale-to-width-down/62?cb=20161013133006";
+        "https://static.wikia.nocookie.net/pokemongo/images/f/f8/Type_Background_Psychic.png/revision/latest/scale-to-width-down/62?cb=20171026003814";
       break;
     case "Rock":
       srcLink =
@@ -85,13 +85,25 @@ export const View = ({ detailed, type, pokemonInfo, ...props }) => {
   }
 
   return (
-    <button type="button" className={type} {...props}>
-      {type ? <img alt="Icon" src={srcLink}></img> : ""}
-    </button>
+    <div
+      id="viewDiv"
+      style={{
+        backgroundImage: "url(" + srcLink + ")",
+      }}
+    >
+      {detailed && <p className={type}>{pokemonInfo.name}</p>}
+      <img alt="Pokemon" src={pokemonInfo.image} />
+      {!detailed && <p className={type}>{pokemonInfo.name}</p>}
+      {detailed && <div></div>}
+    </div>
   );
 };
 
 View.propTypes = {
+  /**
+   * Detailed view
+   */
+  detailed: PropTypes.bool.isRequired,
   /**
    * Set colors and icon based on type eg: Grass - Green
    */
@@ -116,13 +128,52 @@ View.propTypes = {
     "Steel",
     "Water",
   ]),
-  /**
-   * Detailed view
-   */
-  detailed: PropTypes.bool.isRequired,
 };
 
 View.defaultProps = {
   detailed: false,
   type: "",
+  pokemonInfo: {
+    name: "Bulbasaur",
+    image: "https://img.pokemondb.net/artwork/bulbasaur.jpg",
+    weight: {
+      minimum: "6.04kg",
+      maximum: "7.76kg",
+    },
+    height: {
+      minimum: "0.61m",
+      maximum: "0.79m",
+    },
+    attacks: {
+      fast: [
+        {
+          name: "Tackle",
+          type: "Normal",
+          damage: 12,
+        },
+        {
+          name: "Vine Whip",
+          type: "Grass",
+          damage: 7,
+        },
+      ],
+      special: [
+        {
+          name: "Power Whip",
+          type: "Grass",
+          damage: 70,
+        },
+        {
+          name: "Seed Bomb",
+          type: "Grass",
+          damage: 40,
+        },
+        {
+          name: "Sludge Bomb",
+          type: "Poison",
+          damage: 55,
+        },
+      ],
+    },
+  },
 };

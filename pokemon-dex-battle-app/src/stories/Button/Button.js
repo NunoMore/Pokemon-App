@@ -86,13 +86,17 @@ export const Button = ({ type, onClick, label, ...props }) => {
 
   return (
     <button type="button" onClick={onClick} className={type} {...props}>
-      {type ? <img alt="Icon" src={srcLink}></img> : ""}
-      {" " + label}
+      {type && <img alt="Icon" src={srcLink} />}
+      {label}
     </button>
   );
 };
 
 Button.propTypes = {
+  /**
+   * Button contents
+   */
+  label: PropTypes.string.isRequired,
   /**
    * Set of colors based on type eg: Grass - Green
    */
@@ -117,10 +121,6 @@ Button.propTypes = {
     "Steel",
     "Water",
   ]),
-  /**
-   * Button contents
-   */
-  label: PropTypes.string.isRequired,
 };
 
 Button.defaultProps = {

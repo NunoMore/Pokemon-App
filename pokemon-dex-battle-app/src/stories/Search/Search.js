@@ -5,11 +5,11 @@ import "./search.css";
  */
 export const SearchBar = ({ filterAction }) => {
   return (
-    <div id='searchDiv'>
+    <div id="searchDiv">
       <input
         id="searchInput"
-        placeholder={"search"}
-        onChange={(e) => filterAction(e.target.value)}
+        placeholder={"Search by type or name ..."}
+        onChange={(e) => filterAction(e.target.value)} // since component is in storybook, to use redux I had to pass action as prop
       />
     </div>
   );

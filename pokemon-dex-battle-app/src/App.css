@@ -5,6 +5,12 @@
   align-items: center;
 }
 
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 12px;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

@@ -34,7 +34,7 @@ function App() {
           Learn React
         </a>
       </header>
-      <div className="row">
+      <div className="grid">
         {pokemons.map((pokemon: Pokemon) => {
           return <View detailed={false} pokemonInfo={pokemon} />;
         })}

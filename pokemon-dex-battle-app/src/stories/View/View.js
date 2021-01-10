@@ -4,7 +4,8 @@ import "./view.css";
 /**
  * View component
  */
-export const View = ({ detailed, type, pokemonInfo }) => {
+export const View = ({ detailed, pokemonInfo }) => {
+  const type = pokemonInfo.types[0];
   let srcLink = ""; // todo : change links to backgrounds :-D
   switch (type) {
     case "Bug":
@@ -88,6 +89,7 @@ export const View = ({ detailed, type, pokemonInfo }) => {
     <div
       id="viewDiv"
       style={{
+        maxWidth: detailed ? "100%" : "200px",
         backgroundImage: "url(" + srcLink + ")",
       }}
     >
@@ -104,36 +106,12 @@ View.propTypes = {
    * Detailed view
    */
   detailed: PropTypes.bool.isRequired,
-  /**
-   * Set colors and icon based on type eg: Grass - Green
-   */
-  type: PropTypes.oneOf([
-    "",
-    "Bug",
-    "Dark",
-    "Dragon",
-    "Electric",
-    "Fairy",
-    "Fighting",
-    "Fire",
-    "Flying",
-    "Ghost",
-    "Grass",
-    "Ground",
-    "Ice",
-    "Normal",
-    "Poison",
-    "Psychic",
-    "Rock",
-    "Steel",
-    "Water",
-  ]),
 };
 
 View.defaultProps = {
   detailed: false,
-  type: "",
   pokemonInfo: {
+    types: ["Grass"],
     name: "Bulbasaur",
     image: "https://img.pokemondb.net/artwork/bulbasaur.jpg",
     weight: {

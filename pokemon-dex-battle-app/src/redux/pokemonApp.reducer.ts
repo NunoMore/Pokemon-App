@@ -3,6 +3,7 @@ import { Pokemon } from "./../graphQL/graphql-types";
 
 export interface IPokemonAppState {
   pokemons: Pokemon[];
+  filteredPokemon: Pokemon[];
   selectedPokemon: Pokemon;
   loading: boolean;
   error: any;
@@ -11,6 +12,7 @@ export interface IPokemonAppState {
 export const PokemonAppInitialState: IPokemonAppState = {
   error: null,
   loading: false,
+  filteredPokemon: [],
   pokemons: [],
   selectedPokemon: {
     name: "",
@@ -29,6 +31,7 @@ export const PokemonAppInitialState: IPokemonAppState = {
 
 export const PokemonAppActionTypes = {
   SET_ALL_POKEMON: "SET_ALL_POKEMON",
+  FILTER_POKEMON: "FILTER_POKEMON",
   LOADING: "LOADING",
   SET_ERROR: "SET_ERROR",
 };
@@ -46,9 +49,26 @@ export const PokemonAppActions = {
       return { payload: pokemons };
     }
   ),
+  filterPokemon: createAction(
+    PokemonAppActionTypes.FILTER_POKEMON,
+    (searchValue: string) => {
+      return { payload: searchValue.toLocaleLowerCase() };
+    }
+  ),
 };
 
 export const PokemonAppReducer = createReducer(PokemonAppInitialState, {
+  [PokemonAppActions.filterPokemon.type]: (
+    state: IPokemonAppState,
+    action: PayloadAction<string>
+  ) => {
+    state.filteredPokemon = state.pokemons.filter(
+      (p) =>
+        p.name.toLocaleLowerCase().includes(action.payload) ||
+        p.types.filter((t) => t.toLocaleLowerCase().includes(action.payload))
+          .length > 0
+    );
+  },
   [PokemonAppActions.setError.type]: (
     state: IPokemonAppState,
     action: PayloadAction<any>

@@ -8,15 +8,19 @@
 
 #pokeImg {
   width: 80%;
-  padding-right: 10%;
-  padding-top: 10%;
-  padding-left: 10%;
 }
 
 p {
   font-size: 200%;
   text-align: center;
   background-color: transparent !important;
+}
+
+.imgContainer{
+  height: 50%;
+  padding-right: 10%;
+  padding-top: 10%;
+  padding-left: 10%;
 }
 
 .Bug {

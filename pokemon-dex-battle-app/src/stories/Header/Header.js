@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { BattleActions } from "../../redux/battle.reducer";
-import { PokemonAppActions } from "../../redux/home.reducer";
 import { Button } from "../Button/Button";
 import "./header.css";
 

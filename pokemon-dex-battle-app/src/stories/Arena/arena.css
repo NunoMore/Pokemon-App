@@ -1,0 +1,28 @@
+.moves {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 5px;
+}
+
+.arena {
+  padding-right: 10%;
+  padding-left: 10%;
+  height: 60%;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 5px;
+}
+
+.arenaImg {
+  height: 60%;
+}
+
+#oponnent {
+  padding-top: 5%;
+  align-content: left;
+  text-align: left;
+}
+
+#player {
+  text-align: right;
+}

@@ -23,5 +23,5 @@ export interface Attacks {
 export interface Attack {
   name: string;
   type: string;
-  damage: string;
+  damage: number;
 }

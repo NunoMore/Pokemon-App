@@ -5,16 +5,20 @@ export interface IPokemonAppState {
   allPokemon: Pokemon[];
   filteredPokemon: Pokemon[];
   selectedPokemon: Pokemon | undefined;
+  opponent: Pokemon | undefined;
   loading: boolean;
+  fighting: boolean;
   error: any;
 }
 
 export const PokemonAppInitialState: IPokemonAppState = {
   error: null,
   loading: false,
+  fighting: false,
   filteredPokemon: [],
   allPokemon: [],
   selectedPokemon: undefined,
+  opponent: undefined,
 };
 
 export const PokemonAppActionTypes = {
@@ -22,10 +26,14 @@ export const PokemonAppActionTypes = {
   SELECT_POKEMON: "SELECT_POKEMON",
   FILTER_POKEMON: "FILTER_POKEMON",
   LOADING: "LOADING",
+  FIGHT: "FIGHT",
   SET_ERROR: "SET_ERROR",
 };
 
 export const PokemonAppActions = {
+  fight: createAction(PokemonAppActionTypes.FIGHT, (opponent: Pokemon) => {
+    return { payload: opponent };
+  }),
   loading: createAction(PokemonAppActionTypes.LOADING, (loading: boolean) => {
     return { payload: loading };
   }),
@@ -53,6 +61,12 @@ export const PokemonAppActions = {
 };
 
 export const PokemonAppReducer = createReducer(PokemonAppInitialState, {
+  [PokemonAppActions.fight.type]: (
+    state: IPokemonAppState,
+    action: PayloadAction<Pokemon>
+  ) => {
+    state.opponent = action.payload;
+  },
   [PokemonAppActions.selectPokemon.type]: (
     state: IPokemonAppState,
     action: PayloadAction<string>

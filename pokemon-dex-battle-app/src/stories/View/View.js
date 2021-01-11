@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
-import { PokemonAppActions } from "../../redux/pokemonApp.reducer";
+import { useDispatch, useSelector } from "react-redux";
+import { SidePanelActions } from "../../redux/side-panel.reducer";
 import { Button } from "../Button/Button";
 import "./view.css";
 
@@ -9,6 +9,7 @@ import "./view.css";
  */
 export const View = ({ detailed, pokemonInfo }) => {
   const dispatch = useDispatch();
+  const allPokemon = useSelector((state) => state.homeState.allPokemon);
   const type = pokemonInfo.types[0];
   let srcLink = "";
   switch (type) {
@@ -105,7 +106,7 @@ export const View = ({ detailed, pokemonInfo }) => {
           <Button
             type={type}
             label="X"
-            onClick={() => dispatch(PokemonAppActions.selectPokemon(undefined))}
+            onClick={() => dispatch(SidePanelActions.closeSidePanel())}
           />
         </div>
       )}
@@ -113,9 +114,7 @@ export const View = ({ detailed, pokemonInfo }) => {
         id="pokeImg"
         alt="Pokemon"
         src={pokemonInfo.image}
-        onClick={() =>
-          dispatch(PokemonAppActions.selectPokemon(pokemonInfo.name))
-        }
+        onClick={() => dispatch(SidePanelActions.selectPokemon(pokemonInfo))}
       />
       {detailed ? (
         <div className="grid">
@@ -126,7 +125,11 @@ export const View = ({ detailed, pokemonInfo }) => {
                 alt=""
                 src={ev.image}
                 onClick={() =>
-                  dispatch(PokemonAppActions.selectPokemon(ev.name))
+                  dispatch(
+                    SidePanelActions.selectPokemon(
+                      allPokemon.find((p) => p.name === ev.name)
+                    )
+                  )
                 }
               />
             ))}

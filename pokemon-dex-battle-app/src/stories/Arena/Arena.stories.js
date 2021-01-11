@@ -6,5 +6,9 @@ export default {
   component: Arena,
 };
 
-const Template = (args) => <Arena {...args} />;
+const Template = (args) => (
+  <Provider store={store}>
+    <Arena {...args} />
+  </Provider>
+);
 export const ArenaTest = Template.bind({});

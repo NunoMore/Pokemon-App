@@ -1,44 +1,76 @@
+import { useDispatch, useSelector } from "react-redux";
+import { BattleActions } from "../../redux/battle.reducer";
 import { Button } from "../Button/Button";
 import "./arena.css";
 
 /**
  * Arena component
  */
-export const Arena = ({ pokemonInfo, opponentInfo }) => {
+export const Arena = () => {
+  const dispatch = useDispatch();
+  const allPokemon = useSelector((state) => state.homeState.allPokemon);
+  const currentHP = useSelector((state) => state.battleState.currentHP);
+  const opponentHP = useSelector((state) => state.battleState.opponentHP);
+
+  // todo : choose based on selectedPokemon weakness and resistance ; set dificulty
+  const currentPokemon = useSelector(
+    (state) => state.battleState.currentPokemon
+  );
+  const opponent = useSelector((state) => state.battleState.opponent);
+  const opponentNumber = Math.round(Math.random() * 150);
+  const newOpponent = allPokemon[opponentNumber];
+
   const image = (pokemon) => (
     <img className="arenaImg" alt="" src={pokemon.image} />
   );
   const name = (pokemon) => <p>{pokemon.name}</p>;
-  const healthBar = (pokemon) => <p>{pokemon.maxHP}</p>;
+  const healthBar = (hpValue) => <p>{hpValue}</p>; // todo : improve this
   const attackButton = (move) => (
-    <Button type={move.type} label={move.name} onClick={attack(move)} />
+    <Button type={move.type} label={move.name} onClick={() => attack(move)} />
   );
   const attack = (move) => {
-    console.log(move.damage);
+    if (opponentHP <= 0) {
+      dispatch(BattleActions.endFight());
+    } else {
+      const multiplier = opponent.resistant.includes(move.type)
+        ? 0.5
+        : opponent.weaknesses.includes(move.type)
+        ? 2
+        : 1;
+      const damage = move.damage * multiplier;
+      dispatch(BattleActions.attack(damage, true));
+    }
   };
+
+  // todo : make opponent attack
 
   return (
     <div>
-      <div id="oponnent" className="arena">
-        <div className="arenaDiv">{image(opponentInfo)}</div>
-        <div>
-          {name(opponentInfo)}
-          {healthBar(opponentInfo)}
-        </div>
-      </div>
-      <div id="player">
-        <div className="arena">
-          <div>
-            {name(pokemonInfo)}
-            {healthBar(pokemonInfo)}
+      {(opponent && (
+        <>
+          <div id="oponnent" className="arena">
+            <div className="arenaDiv">{image(opponent)}</div>
+            <div>
+              {name(opponent)}
+              {healthBar(opponentHP)}
+            </div>
           </div>
-          <div>{image(pokemonInfo)}</div>
-        </div>
-        <div id="moves">
-          {pokemonInfo.attacks.fast.map((move) => attackButton(move))}
-          {pokemonInfo.attacks.special.map((move) => attackButton(move))}
-        </div>
-      </div>
+          <div id="player">
+            <div className="arena">
+              <div>
+                {name(currentPokemon)}
+                {healthBar(currentHP)}
+              </div>
+              <div>{image(currentPokemon)}</div>
+            </div>
+            <div id="moves">
+              {currentPokemon.attacks.fast.map((move) => attackButton(move))}
+              {currentPokemon.attacks.special.map((move) => attackButton(move))}
+            </div>
+          </div>
+        </>
+      )) ||
+        dispatch(BattleActions.chooseOpponent(newOpponent))}
     </div>
   );
 };

@@ -5,43 +5,49 @@ import { IStoreState } from "./redux/store";
 import { View } from "./stories/View/View";
 import GetAllPokemonQuery from "./graphQL/graphql-queryStrings";
 import { useQuery } from "@apollo/client";
-import { PokemonAppActions } from "./redux/pokemonApp.reducer";
+import { HomeActions } from "./redux/home.reducer";
 import { Header } from "./stories/Header/Header";
 import { SearchBar } from "./stories/Search/Search";
 import { Arena } from "./stories/Arena/Arena";
+import { BattleActions } from "./redux/battle.reducer";
 
 function App() {
   const dispatch = useDispatch();
   const allPokemon: Pokemon[] = useSelector(
-    (state: IStoreState) => state.pokemonAppState.allPokemon
+    (state: IStoreState) => state.homeState.allPokemon
   );
   const filteredPokemon: Pokemon[] = useSelector(
-    (state: IStoreState) => state.pokemonAppState.filteredPokemon
+    (state: IStoreState) => state.homeState.filteredPokemon
   );
   const selectedPokemon: Pokemon | undefined = useSelector(
-    (state: IStoreState) => state.pokemonAppState.selectedPokemon
+    (state: IStoreState) => state.sidePanelState.selectedPokemon
   );
-  const opponent: Pokemon | undefined = useSelector(
-    (state: IStoreState) => state.pokemonAppState.opponent
+  const sidePanelOpen: boolean = useSelector(
+    (state: IStoreState) => state.sidePanelState.sidePanelOpen
+  );
+  const fighting: boolean = useSelector(
+    (state: IStoreState) => state.battleState.fighting
   );
 
   const { loading, error, data } = useQuery(GetAllPokemonQuery);
-  dispatch(PokemonAppActions.loading(loading));
+  dispatch(HomeActions.loading(loading));
   if (error) {
-    dispatch(PokemonAppActions.setError(error));
+    dispatch(HomeActions.setError(error));
   } else if (!loading && allPokemon.length === 0) {
-    dispatch(PokemonAppActions.setAllPokemon(data.pokemons));
+    dispatch(HomeActions.setAllPokemon(data.pokemons));
   }
 
   const filterAction = (str: string) =>
-    dispatch(PokemonAppActions.filterPokemon(str));
+    dispatch(HomeActions.filterPokemon(str));
 
   return (
     <div className="App">
       <Header />
-      {(opponent && selectedPokemon && (
-        <Arena opponentInfo={opponent} pokemonInfo={selectedPokemon} />
-      )) || (
+      {(fighting &&
+        selectedPokemon &&
+        dispatch(BattleActions.setCurrentPokemon(selectedPokemon)) && (
+          <Arena />
+        )) || (
         <div>
           <SearchBar filterAction={filterAction} />
           <div className="mainGrid">
@@ -50,7 +56,7 @@ function App() {
                 return <View detailed={false} pokemonInfo={pokemon} />;
               })}
             </div>
-            {selectedPokemon && (
+            {sidePanelOpen && (
               <div>
                 <View detailed={true} pokemonInfo={selectedPokemon} />
               </div>

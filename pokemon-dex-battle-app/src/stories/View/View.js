@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { PokemonAppActions } from "../../redux/pokemonApp.reducer";
+import { Button } from "../Button/Button";
 import "./view.css";
 
 /**
@@ -101,12 +102,11 @@ export const View = ({ detailed, pokemonInfo }) => {
       {detailed && (
         <div className="mainGrid">
           <p className={type}>{pokemonInfo.name + " " + pokemonInfo.number}</p>
-          <button
-            style={{ float: "right" }}
+          <Button
+            type={type}
+            label="X"
             onClick={() => dispatch(PokemonAppActions.selectPokemon(undefined))}
-          >
-            X
-          </button>
+          />
         </div>
       )}
       <img

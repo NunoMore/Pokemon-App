@@ -86,7 +86,7 @@ export const Button = ({ type, onClick, label }) => {
 
   return (
     <button type="button" onClick={onClick} className={type}>
-      {type && <img id='buttonImg' alt="Icon" src={srcLink} />}
+      {type && <img id="buttonImg" alt="Icon" src={srcLink} />}
       {label}
     </button>
   );

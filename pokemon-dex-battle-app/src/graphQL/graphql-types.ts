@@ -1,5 +1,6 @@
 export interface Pokemon {
   name: string;
+  number: string;
   maxHP: number;
   image: string;
   weaknesses: string[];

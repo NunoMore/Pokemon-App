@@ -70,6 +70,7 @@ export const PokemonAppReducer = createReducer(PokemonAppInitialState, {
         ? state.allPokemon
         : state.allPokemon.filter(
             (p) =>
+              p.number.includes(action.payload) ||
               p.name.toLocaleLowerCase().includes(action.payload) ||
               p.types.filter((t) =>
                 t.toLocaleLowerCase().includes(action.payload)

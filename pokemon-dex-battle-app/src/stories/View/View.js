@@ -1,10 +1,13 @@
 import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
+import { PokemonAppActions } from "../../redux/pokemonApp.reducer";
 import "./view.css";
 
 /**
  * View component
  */
-export const View = ({ detailed, pokemonInfo, selectPokemonAction }) => {
+export const View = ({ detailed, pokemonInfo }) => {
+  const dispatch = useDispatch();
   const type = pokemonInfo.types[0];
   let srcLink = "";
   switch (type) {
@@ -85,47 +88,6 @@ export const View = ({ detailed, pokemonInfo, selectPokemonAction }) => {
       break;
   }
 
-  const details = [];
-  if (detailed && pokemonInfo && typeof pokemonInfo === "object") {
-    Object.keys(pokemonInfo).forEach((entry) => {
-      if (entry && entry !== "name" && entry !== "image") {
-        const entryObj = pokemonInfo[entry];
-        if (entryObj && typeof entryObj === "object") {
-          details.push(<h3>{entry + " :"}</h3>);
-          Object.keys(entryObj).forEach((subEntry) => {
-            const subEntryObj = entryObj[subEntry];
-            if (subEntryObj && typeof subEntryObj === "object") {
-              details.push(<h4>{subEntry + " :"}</h4>);
-              Object.keys(subEntryObj).forEach((subSubEntry) => {
-                const subSubEntryObj = subEntryObj[subSubEntry];
-                if (subSubEntryObj && typeof subSubEntryObj === "object") {
-                  details.push(<h5>{subSubEntry + " :"}</h5>);
-                  Object.keys(subSubEntryObj).forEach((subSubSubEntry) => {
-                    details.push(
-                      <h6>
-                        {subSubSubEntry +
-                          " : " +
-                          subSubEntryObj[subSubSubEntry]}
-                      </h6>
-                    );
-                  });
-                } else {
-                  details.push(
-                    <h5>{subSubEntry + " : " + subSubEntryObj[subSubEntry]}</h5>
-                  );
-                }
-              });
-            } else {
-              details.push(<h4>{subEntry + " : " + subEntryObj[subEntry]}</h4>);
-            }
-          });
-        } else {
-          details.push(<h3>{entry + " : " + entryObj[entry]}</h3>);
-        }
-      }
-    });
-  }
-
   return (
     <div
       id="viewDiv"
@@ -136,15 +98,42 @@ export const View = ({ detailed, pokemonInfo, selectPokemonAction }) => {
         backgroundImage: "url(" + srcLink + ")",
       }}
     >
-      {detailed && <p className={type}>{pokemonInfo.name}</p>}
+      {detailed && (
+        <div className="mainGrid">
+          <p className={type}>{pokemonInfo.name + " " + pokemonInfo.number}</p>
+          <button
+            style={{ float: "right" }}
+            onClick={() => dispatch(PokemonAppActions.selectPokemon(undefined))}
+          >
+            X
+          </button>
+        </div>
+      )}
       <img
-        onClick={selectPokemonAction}
         id="pokeImg"
         alt="Pokemon"
         src={pokemonInfo.image}
+        onClick={() =>
+          dispatch(PokemonAppActions.selectPokemon(pokemonInfo.name))
+        }
       />
-      {!detailed && <p>{pokemonInfo.name}</p>}
-      {detailed && <div id="detailedView">{details}</div>}
+      {detailed ? (
+        <div className="grid">
+          {pokemonInfo.evolutions &&
+            pokemonInfo.evolutions.map((ev) => (
+              <img
+                className="evolutionImg"
+                alt=""
+                src={ev.image}
+                onClick={() =>
+                  dispatch(PokemonAppActions.selectPokemon(ev.name))
+                }
+              />
+            ))}
+        </div>
+      ) : (
+        <p>{pokemonInfo.name}</p>
+      )}
     </div>
   );
 };
@@ -159,44 +148,50 @@ View.propTypes = {
 View.defaultProps = {
   detailed: false,
   pokemonInfo: {
-    types: ["Grass"],
-    name: "Bulbasaur",
-    image: "https://img.pokemondb.net/artwork/bulbasaur.jpg",
-    weight: {
-      minimum: "6.04kg",
-      maximum: "7.76kg",
-    },
-    height: {
-      minimum: "0.61m",
-      maximum: "0.79m",
-    },
+    name: "Charmander",
+    number: "004",
+    maxHP: 955,
+    image: "https://img.pokemondb.net/artwork/charmander.jpg",
+    weaknesses: ["Water", "Ground", "Rock"],
+    types: ["Fire"],
+    resistant: ["Fire", "Grass", "Ice", "Bug", "Steel", "Fairy"],
+    evolutions: [
+      {
+        name: "Charmeleon",
+        image: "https://img.pokemondb.net/artwork/charmeleon.jpg",
+      },
+      {
+        name: "Charizard",
+        image: "https://img.pokemondb.net/artwork/charizard.jpg",
+      },
+    ],
     attacks: {
       fast: [
         {
-          name: "Tackle",
-          type: "Normal",
-          damage: 12,
+          name: "Ember",
+          type: "Fire",
+          damage: 10,
         },
         {
-          name: "Vine Whip",
-          type: "Grass",
-          damage: 7,
+          name: "Scratch",
+          type: "Normal",
+          damage: 6,
         },
       ],
       special: [
         {
-          name: "Power Whip",
-          type: "Grass",
-          damage: 70,
+          name: "Flame Burst",
+          type: "Fire",
+          damage: 30,
         },
         {
-          name: "Seed Bomb",
-          type: "Grass",
-          damage: 40,
+          name: "Flame Charge",
+          type: "Fire",
+          damage: 25,
         },
         {
-          name: "Sludge Bomb",
-          type: "Poison",
+          name: "Flamethrower",
+          type: "Fire",
           damage: 55,
         },
       ],

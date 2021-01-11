@@ -17,6 +17,9 @@ function App() {
   const filteredPokemon: Pokemon[] = useSelector(
     (state: IStoreState) => state.pokemonAppState.filteredPokemon
   );
+  const selectedPokemon: Pokemon | undefined = useSelector(
+    (state: IStoreState) => state.pokemonAppState.selectedPokemon
+  );
 
   const { loading, error, data } = useQuery(GetAllPokemonQuery);
   dispatch(PokemonAppActions.loading(loading));
@@ -30,13 +33,22 @@ function App() {
     dispatch(PokemonAppActions.filterPokemon(str));
 
   return (
-    <div className="App">
-      <Header />
-      <SearchBar filterAction={filterAction} />
-      <div className="grid">
-        {filteredPokemon.map((pokemon: Pokemon) => {
-          return <View detailed={false} pokemonInfo={pokemon} />;
-        })}
+    <div className="App row">
+      <div className="row">
+        <Header />
+        <SearchBar filterAction={filterAction} />
+      </div>
+      <div className="row mainGrid">
+        <div className="grid">
+          {filteredPokemon.map((pokemon: Pokemon) => {
+            return <View detailed={false} pokemonInfo={pokemon} />;
+          })}
+        </div>
+        {selectedPokemon && (
+          <div>
+            <View detailed={true} pokemonInfo={selectedPokemon} />
+          </div>
+        )}
       </div>
     </div>
   );

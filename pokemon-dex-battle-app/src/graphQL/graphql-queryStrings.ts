@@ -5,6 +5,7 @@ export const GetAllPokemonQuery = gql`
     pokemons(first: 151) {
       name
       maxHP
+      number
       image
       weaknesses
       types

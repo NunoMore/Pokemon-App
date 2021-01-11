@@ -1,4 +1,6 @@
 import React from "react";
+import { Provider } from "react-redux";
+import { store } from "../../redux/store";
 
 import { View } from "./View";
 
@@ -7,7 +9,11 @@ export default {
   component: View,
 };
 
-const Template = (args) => <View {...args} />;
+const Template = (args) => (
+  <Provider store={store}>
+    <View {...args} />
+  </Provider>
+);
 
 export const ViewTestSimple = Template.bind({});
 ViewTestSimple.args = {

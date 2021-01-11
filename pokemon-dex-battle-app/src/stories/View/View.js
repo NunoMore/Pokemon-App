@@ -4,7 +4,7 @@ import "./view.css";
 /**
  * View component
  */
-export const View = ({ detailed, pokemonInfo }) => {
+export const View = ({ detailed, pokemonInfo, selectPokemonAction }) => {
   const type = pokemonInfo.types[0];
   let srcLink = "";
   switch (type) {
@@ -137,7 +137,12 @@ export const View = ({ detailed, pokemonInfo }) => {
       }}
     >
       {detailed && <p className={type}>{pokemonInfo.name}</p>}
-      <img id="pokeImg" alt="Pokemon" src={pokemonInfo.image} />
+      <img
+        onClick={selectPokemonAction}
+        id="pokeImg"
+        alt="Pokemon"
+        src={pokemonInfo.image}
+      />
       {!detailed && <p>{pokemonInfo.name}</p>}
       {detailed && <div id="detailedView">{details}</div>}
     </div>

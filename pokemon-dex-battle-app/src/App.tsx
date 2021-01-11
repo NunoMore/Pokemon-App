@@ -35,10 +35,7 @@ function App() {
     dispatch(HomeActions.setError(error));
   } else if (!loading && allPokemon.length === 0) {
     dispatch(HomeActions.setAllPokemon(data.pokemons));
-  }
-
-  const filterAction = (str: string) =>
-    dispatch(HomeActions.filterPokemon(str));
+  }   
 
   return (
     <div className="App">
@@ -49,7 +46,7 @@ function App() {
           <Arena />
         )) || (
         <div>
-          <SearchBar filterAction={filterAction} />
+          <SearchBar />
           <div className="mainGrid">
             <div className="grid">
               {filteredPokemon.map((pokemon: Pokemon) => {

@@ -4,7 +4,7 @@ import { Pokemon } from "./../graphQL/graphql-types";
 export interface IPokemonAppState {
   allPokemon: Pokemon[];
   filteredPokemon: Pokemon[];
-  selectedPokemon: Pokemon;
+  selectedPokemon: Pokemon | undefined;
   loading: boolean;
   error: any;
 }
@@ -14,23 +14,12 @@ export const PokemonAppInitialState: IPokemonAppState = {
   loading: false,
   filteredPokemon: [],
   allPokemon: [],
-  selectedPokemon: {
-    name: "",
-    image: "",
-    maxHP: 0,
-    resistant: [],
-    weaknesses: [],
-    evolutions: [],
-    types: [],
-    attacks: {
-      fast: [],
-      special: [],
-    },
-  },
+  selectedPokemon: undefined,
 };
 
 export const PokemonAppActionTypes = {
   SET_ALL_POKEMON: "SET_ALL_POKEMON",
+  SELECT_POKEMON: "SELECT_POKEMON",
   FILTER_POKEMON: "FILTER_POKEMON",
   LOADING: "LOADING",
   SET_ERROR: "SET_ERROR",
@@ -55,9 +44,23 @@ export const PokemonAppActions = {
       return { payload: searchValue.toLocaleLowerCase() };
     }
   ),
+  selectPokemon: createAction(
+    PokemonAppActionTypes.SELECT_POKEMON,
+    (pokemonName: string) => {
+      return { payload: pokemonName };
+    }
+  ),
 };
 
 export const PokemonAppReducer = createReducer(PokemonAppInitialState, {
+  [PokemonAppActions.selectPokemon.type]: (
+    state: IPokemonAppState,
+    action: PayloadAction<string>
+  ) => {
+    state.selectedPokemon = state.allPokemon.find(
+      (p) => p.name === action.payload
+    );
+  },
   [PokemonAppActions.filterPokemon.type]: (
     state: IPokemonAppState,
     action: PayloadAction<string>

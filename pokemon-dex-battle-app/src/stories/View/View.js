@@ -129,17 +129,15 @@ export const View = ({ detailed, pokemonInfo }) => {
   return (
     <div
       id="viewDiv"
-      className={type}
+      className={type + (detailed ? " detailed" : "")}
       style={{
         maxWidth: detailed ? "100%" : "200px",
         maxHeight: detailed ? "100%" : "250px",
         backgroundImage: "url(" + srcLink + ")",
       }}
     >
-      {detailed && <p>{pokemonInfo.name}</p>}
-      <div className="imgContainer">
-        <img id="pokeImg" alt="Pokemon" src={pokemonInfo.image} />
-      </div>
+      {detailed && <p className={type}>{pokemonInfo.name}</p>}
+      <img id="pokeImg" alt="Pokemon" src={pokemonInfo.image} />
       {!detailed && <p>{pokemonInfo.name}</p>}
       {detailed && <div id="detailedView">{details}</div>}
     </div>

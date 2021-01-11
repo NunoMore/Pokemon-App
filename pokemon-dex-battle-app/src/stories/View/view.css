@@ -2,95 +2,26 @@
   background-size: cover;
 }
 
-#detailedView {
+.detailed {
   text-align: left;
-}
-
-#pokeImg {
-  height: 80%;
 }
 
 p {
   font-size: 200%;
   text-align: center;
+  margin: 0%;
+  margin-top: 1em;
   background-color: transparent !important;
 }
 
-.imgContainer{
-  height: 60%;
-  padding-right: 10%;
-  padding-top: 10%;
-  padding-left: 10%;
-}
-
-.Bug {
-  color: greenyellow;
-}
-
-.Grass {
-  color: greenyellow;
-}
-
-.Dark {
-  color: rgb(94, 94, 94);
-}
-
-.Dragon {
-  color: rgb(83, 1, 216);
-}
-
-.Electric {
-  color: rgb(255, 255, 255);
-}
-
-.Fairy {
-  color: rgb(255, 255, 255);
-}
-
-.Fighting {
-  color: rgb(0, 0, 0);
-}
-
-.Fire {
-  color: rgb(177, 26, 26);
-}
-
-.Flying {
-  color: rgb(40, 115, 228);
-}
-
-.Ghost {
-  color: rgb(158, 40, 255);
-}
-
-.Ground {
-  color: rgb(255, 172, 47);
-}
-
-.Ice {
-  color: rgb(50, 255, 245);
-}
-
-.Normal {
-  color: rgb(0, 0, 0);
-}
-
-.Poison {
-  color: rgb(178, 39, 243);
-}
-
-.Psychic {
-  color: rgb(178, 39, 243);
-}
-
-.Rock {
-  color: rgb(243, 229, 39);
-}
-
-.Steel {
-  color: rgb(0, 0, 0);
-}
-
-.Water {
-  color: rgb(255, 255, 255);
+#pokeImg {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 90%;
+  max-height: 60%;
+  height: auto;
+  padding-right: 5%;
+  padding-top: 5%;
+  padding-left: 5%;
 }

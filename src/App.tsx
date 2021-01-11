@@ -1,7 +1,5 @@
 import "./App.css";
-import { Pokemon } from "./graphQL/graphql-types";
-import { useDispatch, useSelector } from "react-redux";
-import { IStoreState } from "./redux/store";
+import { useDispatch } from "react-redux";
 import GetAllPokemonQuery from "./graphQL/graphql-queryStrings";
 import { useQuery } from "@apollo/client";
 import { HomeActions } from "./redux/home.reducer";

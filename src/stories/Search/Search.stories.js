@@ -11,7 +11,7 @@ export default {
 
 const Template = (args) => (
   <Provider store={store}>
-    <SearchBar {...args} />;
+    <SearchBar {...args} />
   </Provider>
 );
 export const SearchBarTest = Template.bind({});

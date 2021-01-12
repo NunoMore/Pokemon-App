@@ -1,4 +1,3 @@
-import "./App.css";
 import { useDispatch } from "react-redux";
 import GetAllPokemonQuery from "./graphQL/graphql-queryStrings";
 import { useQuery } from "@apollo/client";

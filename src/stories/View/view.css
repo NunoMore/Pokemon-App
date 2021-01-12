@@ -1,19 +1,20 @@
-#viewDiv {
+.viewDiv {
   background-size: cover;
+  padding: 1%;
 }
 
 .detailed {
   text-align: left;
 }
 
-p {
+.name {
   font-size: 200%;
   text-align: center;
   margin: 0%;
   background-color: transparent !important;
 }
 
-#pokeImg {
+.selectedPokemonImg {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -25,13 +26,46 @@ p {
   padding-left: 5%;
 }
 
-#evolutionImg {
-  width: 15px;
-  height: auto;
+.evolutionImg {
+  width: auto;
+  height: 100px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.mainGrid {
+.nameGrid {
   display: grid;
-  grid-template-columns: auto max-content;
+  grid-template-columns: auto 100px;
   grid-gap: 12px;
+}
+
+.evolutionGrid {
+  padding-top: 5%;
+  margin-left: auto;
+  margin-right: auto;
+  align-content: center;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 12px;
+}
+
+h3 {
+  margin: 0;
+  padding-left: 10px;
+}
+
+h4 {
+  margin: 0;
+  padding-left: 20px;
+}
+
+h5 {
+  margin: 0;
+  padding-left: 30px;
+}
+
+h6 {
+  margin: 0;
+  padding-left: 40px;
 }

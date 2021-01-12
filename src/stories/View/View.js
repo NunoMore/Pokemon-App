@@ -7,10 +7,10 @@ import "./view.css";
 /**
  * View component
  */
-export const View = ({ detailed, pokemonInfo }) => {
+export const View = ({ detailed, selectedPokemon }) => {
   const dispatch = useDispatch();
   const allPokemon = useSelector((state) => state.homeState.allPokemon);
-  const type = pokemonInfo.types[0];
+  const type = selectedPokemon.types[0];
   let srcLink = "";
   switch (type) {
     case "Bug":
@@ -90,52 +90,81 @@ export const View = ({ detailed, pokemonInfo }) => {
       break;
   }
 
+  const nameComponent = (
+    <p className={type + " name"}>
+      {selectedPokemon.name + " " + selectedPokemon.number}
+    </p>
+  );
+  const pokemonImgComponent = (pokemon, className) => (
+    <img
+      className={className}
+      alt=""
+      src={pokemon.image}
+      onClick={() =>
+        dispatch(
+          SidePanelActions.selectPokemon(
+            allPokemon.find((p) => p.name === pokemon.name)
+          )
+        )
+      }
+    />
+  );
+  const details = (
+    <div className="detailsDiv">
+      <h3>DETAILS:</h3>
+      <h4>- Max HP: {<span>{selectedPokemon.maxHP}</span>}</h4>
+      <h4>- Available Fast Moves:</h4>
+      {selectedPokemon.attacks.fast.map((move) => (
+        <h5>
+          _{move.type} - {move.name} ({move.damage})
+        </h5>
+      ))}
+      <h4>- Available Special Moves:</h4>
+      {selectedPokemon.attacks.special.map((move) => (
+        <h5>
+          _{move.type} - {move.name} ({move.damage})
+        </h5>
+      ))}
+      <h4>- Types</h4>
+      {selectedPokemon.types.map((type) => (
+        <h5>_{type}</h5>
+      ))}
+    </div>
+  );
+
   return (
     <div
-      id="viewDiv"
-      className={type + (detailed ? " detailed" : "")}
+      className={type + (detailed ? " detailed" : "") + " viewDiv"}
       style={{
-        maxWidth: detailed ? "100%" : "200px",
-        maxHeight: detailed ? "100%" : "250px",
+        maxWidth: detailed ? "100%" : "250px",
+        maxHeight: detailed ? "100%" : "300px",
         backgroundImage: "url(" + srcLink + ")",
       }}
     >
-      {detailed && (
-        <div className="mainGrid">
-          <p className={type}>{pokemonInfo.name + " " + pokemonInfo.number}</p>
-          <Button
-            type={type}
-            label="X"
-            onClick={() => dispatch(SidePanelActions.closeSidePanel())}
-          />
+      {(detailed && (
+        <div>
+          <div className="nameGrid">
+            {nameComponent}
+            <Button
+              type={type}
+              label="X"
+              onClick={() => dispatch(SidePanelActions.closeSidePanel())}
+            />
+          </div>
+          {pokemonImgComponent(selectedPokemon, "selectedPokemonImg")}
+          {details}
+          <div className="evolutionGrid">
+            {selectedPokemon.evolutions &&
+              selectedPokemon.evolutions.map((ev) =>
+                pokemonImgComponent(ev, "evolutionImg")
+              )}
+          </div>
         </div>
-      )}
-      <img
-        id="pokeImg"
-        alt="Pokemon"
-        src={pokemonInfo.image}
-        onClick={() => dispatch(SidePanelActions.selectPokemon(pokemonInfo))}
-      />
-      {detailed ? (
-        <div className="grid">
-          {pokemonInfo.evolutions &&
-            pokemonInfo.evolutions.map((ev) => (
-              <img
-                className="evolutionImg"
-                alt=""
-                src={ev.image}
-                onClick={() =>
-                  dispatch(
-                    SidePanelActions.selectPokemon(
-                      allPokemon.find((p) => p.name === ev.name)
-                    )
-                  )
-                }
-              />
-            ))}
+      )) || (
+        <div>
+          {pokemonImgComponent(selectedPokemon, "selectedPokemonImg")}
+          {nameComponent}
         </div>
-      ) : (
-        <p>{pokemonInfo.name}</p>
       )}
     </div>
   );
@@ -150,7 +179,7 @@ View.propTypes = {
 
 View.defaultProps = {
   detailed: false,
-  pokemonInfo: {
+  selectedPokemon: {
     name: "Charmander",
     number: "004",
     maxHP: 955,

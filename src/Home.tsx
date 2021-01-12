@@ -1,4 +1,4 @@
-import "./App.css";
+import "./Home.css";
 import { Pokemon } from "./graphQL/graphql-types";
 import { useDispatch, useSelector } from "react-redux";
 import { IStoreState } from "./redux/store";
@@ -39,12 +39,12 @@ function Home() {
           <div className="mainGrid">
             <div className="grid">
               {filteredPokemon.map((pokemon: Pokemon) => {
-                return <View detailed={false} pokemonInfo={pokemon} />;
+                return <View detailed={false} selectedPokemon={pokemon} />;
               })}
             </div>
             {sidePanelOpen && (
               <div>
-                <View detailed={true} pokemonInfo={selectedPokemon} />
+                <View detailed={true} selectedPokemon={selectedPokemon} />
               </div>
             )}
           </div>

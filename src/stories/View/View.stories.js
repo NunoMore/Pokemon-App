@@ -15,12 +15,7 @@ const Template = (args) => (
   </Provider>
 );
 
-export const ViewTestSimple = Template.bind({});
-ViewTestSimple.args = {
+export const ViewTest = Template.bind({});
+ViewTest.args = {
   detailed: false,
-};
-
-export const ViewTestDetailed = Template.bind({});
-ViewTestDetailed.args = {
-  detailed: true,
 };

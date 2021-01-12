@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  install-build-test:
+  build_Storybook:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -22,12 +22,6 @@ jobs:
       with:
         node-version: 15.x
       
-    - name: Yarn install
-      run: yarn install
+    - name: Yarn build-storybook
+      run: yarn build-storybook
       
-    - name: Yarn build
-      run: yarn build
-      
-    - name: Yarn test
-      run: yarn test
-      if: ${{ false }} #temporarily disabled

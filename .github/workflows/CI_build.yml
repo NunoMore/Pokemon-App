@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  install-build-test:
+  install-build:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -22,6 +22,8 @@ jobs:
       with:
         node-version: 15.x
       
-    - name: Yarn build-storybook
-      run: yarn build-storybook
+    - name: Yarn install
+      run: yarn install
       
+    - name: Yarn build
+      run: yarn build

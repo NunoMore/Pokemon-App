@@ -1,4 +1,5 @@
-import { useDispatch, useSelector } from "react-redux";
+import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
 import { BattleActions } from "../../redux/battle.reducer";
 import { Button } from "../Button/Button";
 import "./header.css";
@@ -6,24 +7,20 @@ import "./header.css";
 /**
  * Header component
  */
-export const Header = () => {
+export const Header = ({ fighting, isPokemonSelected }) => {
   const dispatch = useDispatch();
-  const fighting = useSelector((state) => state.battleState.fighting);
-  const selectedPokemon = useSelector(
-    (state) => state.sidePanelState.selectedPokemon
-  );
   const pokemon_logo =
     "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1280px-International_Pok%C3%A9mon_logo.svg.png";
   return (
-    <div id="headerDiv">
-      <img id="pokemonLogoImg" alt="" src={pokemon_logo} />
-      {(fighting && selectedPokemon && (
+    <div>
+      <img className="pokemonLogoImg" alt="" src={pokemon_logo} />
+      {(fighting && isPokemonSelected && (
         <Button
           label="Quit"
           onClick={() => dispatch(BattleActions.endFight())}
         />
       )) ||
-        (selectedPokemon && (
+        (isPokemonSelected && (
           <Button
             label="FIGHT"
             onClick={() => dispatch(BattleActions.fight())}
@@ -31,4 +28,20 @@ export const Header = () => {
         ))}
     </div>
   );
+};
+
+Header.propTypes = {
+  /**
+   * In battle
+   */
+  fighting: PropTypes.bool.isRequired,
+  /**
+   * In battle
+   */
+  isPokemonSelected: PropTypes.bool.isRequired,
+};
+
+Header.defaultProps = {
+  fighting: false,
+  isPokemonSelected: false,
 };

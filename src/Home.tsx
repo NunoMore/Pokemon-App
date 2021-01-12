@@ -25,7 +25,10 @@ function Home() {
 
   return (
     <div className="App">
-      <Header />
+      <Header
+        fighting={fighting}
+        isPokemonSelected={selectedPokemon ? true : false}
+      />
       {(fighting &&
         selectedPokemon &&
         dispatch(BattleActions.setCurrentPokemon(selectedPokemon)) && (

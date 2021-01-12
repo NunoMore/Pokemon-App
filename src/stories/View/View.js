@@ -113,13 +113,13 @@ export const View = ({ detailed, selectedPokemon }) => {
     <div className="detailsDiv">
       <h3>DETAILS:</h3>
       <h4>- Max HP: {<span>{selectedPokemon.maxHP}</span>}</h4>
-      <h4>- Available Fast Moves:</h4>
+      <h4>- Fast Moves:</h4>
       {selectedPokemon.attacks.fast.map((move) => (
         <h5>
           _{move.type} - {move.name} ({move.damage})
         </h5>
       ))}
-      <h4>- Available Special Moves:</h4>
+      <h4>- Special Moves:</h4>
       {selectedPokemon.attacks.special.map((move) => (
         <h5>
           _{move.type} - {move.name} ({move.damage})

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { BattleActions } from "../../redux/battle.reducer";
 import { SidePanelActions } from "../../redux/side-panel.reducer";
 import { Button } from "../Button/Button";
+import { Team } from "../Team/Team";
 import "./view.css";
 
 /**
@@ -11,6 +12,7 @@ import "./view.css";
 export const View = ({ detailed, selectedPokemon }) => {
   const dispatch = useDispatch();
   const allPokemon = useSelector((state) => state.homeState.allPokemon);
+  const myTeam = useSelector((state) => state.battleState.myTeam);
   const type = selectedPokemon.types[0];
   let srcLink = "";
   switch (type) {
@@ -139,17 +141,19 @@ export const View = ({ detailed, selectedPokemon }) => {
       style={{
         maxWidth: detailed ? "100%" : "250px",
         maxHeight: detailed ? "100%" : "300px",
+        textAlign: detailed ? "left" : "center",
         backgroundImage: "url(" + srcLink + ")",
       }}
     >
       {(detailed && (
         <div>
+          <Team team={myTeam} />
           <div className="titleGrid">
             {nameComponent}
             <Button
               type={type}
               label="Add To Team"
-              onClick={() =>  dispatch(BattleActions.addMyTeam(selectedPokemon))}
+              onClick={() => dispatch(BattleActions.addMyTeam(selectedPokemon))}
             />
             <Button
               type={type}

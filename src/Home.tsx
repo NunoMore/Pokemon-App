@@ -42,7 +42,6 @@ function Home() {
             </div>
             {sidePanelOpen && (
               <div>
-                <Team team={myTeam} />
                 <View detailed={true} selectedPokemon={selectedPokemon} />
               </div>
             )}

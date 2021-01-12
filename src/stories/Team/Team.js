@@ -17,7 +17,12 @@ export const Team = ({ team }) => {
     />
   );
 
-  return <div className="teamGrid">{team.map((p) => image(p))}</div>;
+  return (
+    <div className="teamDiv">
+      My Team
+      <div className="teamGrid">{team.map((p) => image(p))}</div>
+    </div>
+  );
 };
 
 Team.defaultProps = {

@@ -1,6 +1,11 @@
-.teamGrid {
+.teamDiv {
+  text-align: center;
   border-style: solid;
+}
+
+.teamGrid {
   padding: 5%;
+  margin-bottom: 5%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
   grid-gap: 12px;

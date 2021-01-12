@@ -26,5 +26,5 @@ jobs:
       run: yarn install
       
     - name: Yarn build-storybook
-      run: yarn build-storybook
+      run: yarn build-storybook -s public
       

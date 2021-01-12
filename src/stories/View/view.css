@@ -9,7 +9,7 @@
 
 .name {
   font-size: 200%;
-  text-align: center;
+  text-align: left;
   margin: 0%;
   background-color: transparent !important;
 }
@@ -34,9 +34,10 @@
   margin-right: auto;
 }
 
-.nameGrid {
+.titleGrid {
   display: grid;
-  grid-template-columns: auto 100px;
+  grid-template-columns: auto 100px 100px;
+  /* repeat(auto-fit, minmax(100px, 1fr)); */
   grid-gap: 12px;
 }
 

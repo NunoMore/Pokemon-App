@@ -1,23 +1,25 @@
 import "./Home.css";
 import { Pokemon } from "./graphQL/graphql-types";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { IStoreState } from "./redux/store";
 import { View } from "./stories/View/View";
 import { Header } from "./stories/Header/Header";
 import { SearchBar } from "./stories/Search/Search";
 import { Arena } from "./stories/Arena/Arena";
-import { BattleActions } from "./redux/battle.reducer";
+import { Team } from "./stories/Team/Team";
 
 function Home() {
-  const dispatch = useDispatch();
   const filteredPokemon: Pokemon[] = useSelector(
     (state: IStoreState) => state.homeState.filteredPokemon
+  );
+  const sidePanelOpen: boolean = useSelector(
+    (state: IStoreState) => state.sidePanelState.sidePanelOpen
   );
   const selectedPokemon: Pokemon | undefined = useSelector(
     (state: IStoreState) => state.sidePanelState.selectedPokemon
   );
-  const sidePanelOpen: boolean = useSelector(
-    (state: IStoreState) => state.sidePanelState.sidePanelOpen
+  const myTeam: Pokemon[] = useSelector(
+    (state: IStoreState) => state.battleState.myTeam
   );
   const fighting: boolean = useSelector(
     (state: IStoreState) => state.battleState.fighting
@@ -27,13 +29,9 @@ function Home() {
     <div className="App">
       <Header
         fighting={fighting}
-        isPokemonSelected={selectedPokemon ? true : false}
+        isTeamReady={myTeam.length >= 3 ? true : false}
       />
-      {(fighting &&
-        selectedPokemon &&
-        dispatch(BattleActions.setCurrentPokemon(selectedPokemon)) && (
-          <Arena />
-        )) || (
+      {(fighting && myTeam.length > 0 && <Arena />) || (
         <div>
           <SearchBar />
           <div className="mainGrid">
@@ -44,6 +42,7 @@ function Home() {
             </div>
             {sidePanelOpen && (
               <div>
+                <Team team={myTeam} />
                 <View detailed={true} selectedPokemon={selectedPokemon} />
               </div>
             )}

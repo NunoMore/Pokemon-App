@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
+import { BattleActions } from "../../redux/battle.reducer";
 import { SidePanelActions } from "../../redux/side-panel.reducer";
 import { Button } from "../Button/Button";
 import "./view.css";
@@ -143,8 +144,13 @@ export const View = ({ detailed, selectedPokemon }) => {
     >
       {(detailed && (
         <div>
-          <div className="nameGrid">
+          <div className="titleGrid">
             {nameComponent}
+            <Button
+              type={type}
+              label="Add To Team"
+              onClick={() =>  dispatch(BattleActions.addMyTeam(selectedPokemon))}
+            />
             <Button
               type={type}
               label="X"

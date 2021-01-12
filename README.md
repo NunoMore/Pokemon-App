@@ -4,4 +4,4 @@ Storybook created using tutorial in : https://www.learnstorybook.com/intro-to-st
 
 Apolo client set using : https://www.apollographql.com/docs/react/get-started/
 
-Type icons from : https://pokemongo.fandom.com/wiki/Types
+Type background and icons from : https://pokemongo.fandom.com/wiki/Types

@@ -13,8 +13,15 @@
   grid-gap: 5px;
 }
 
+.arenaColumn{
+  max-width: 50%;
+  height: 50%;
+}
+
 .arenaImg {
-  height: 60%;
+  width: auto;
+  height: 50%;
+  margin: 1%;
 }
 
 #oponnent {
@@ -24,5 +31,6 @@
 }
 
 #player {
+  padding-top: 5%;
   text-align: right;
 }

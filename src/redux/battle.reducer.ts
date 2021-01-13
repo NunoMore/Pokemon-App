@@ -23,7 +23,8 @@ export const BattleInitialState: IBattleState = {
 
 export const BattleActionTypes = {
   ADD_MY_TEAM: "ADD_MY_TEAM",
-  REMOVE_MY_TEAM: "REMOVE_MY_TEAM",
+  FAINT_MY_TEAM: "FAINT_MY_TEAM",
+  FAINT_OPPONENT: "FAINT_OPPONENT",
   SET_OPPONENT_TEAM: "SET_OPPONENT_TEAM",
   CHOOSE_OPPONENT: "CHOOSE_OPPONENT",
   CHOOSE_CURRENT_POKEMON: "CHOOSE_CURRENT_POKEMON",
@@ -56,8 +57,14 @@ export const BattleActions = {
   addMyTeam: createAction(BattleActionTypes.ADD_MY_TEAM, (pokemon: Pokemon) => {
     return { payload: pokemon };
   }),
-  removeMyTeam: createAction(
-    BattleActionTypes.REMOVE_MY_TEAM,
+  faintMyTeam: createAction(
+    BattleActionTypes.FAINT_MY_TEAM,
+    (pokemon: Pokemon) => {
+      return { payload: pokemon };
+    }
+  ),
+  faintOpponentTeam: createAction(
+    BattleActionTypes.FAINT_OPPONENT,
     (pokemon: Pokemon) => {
       return { payload: pokemon };
     }
@@ -76,7 +83,16 @@ export const BattleReducer = createReducer(BattleInitialState, {
     state.currentPokemon = state.myTeam[0];
     state.currentHP = state.myTeam[0].maxHP;
   },
-  [BattleActions.endFight.type]: () => BattleInitialState,
+  [BattleActions.endFight.type]: (state: IBattleState) => {
+    state.fighting = false;
+    state.currentOpponent = undefined;
+    state.currentPokemon = undefined;
+    state.currentOpponentHP = 0;
+    state.currentHP = 0;
+    state.opponentTeam = [];
+    state.myTeam = [];
+    
+  },
   [BattleActions.chooseOpponent.type]: (
     state: IBattleState,
     action: PayloadAction<Pokemon>
@@ -107,16 +123,31 @@ export const BattleReducer = createReducer(BattleInitialState, {
       state.myTeam.length < 5 &&
       state.myTeam.push(action.payload);
   },
-  [BattleActions.removeMyTeam.type]: (
+  [BattleActions.faintMyTeam.type]: (
     state: IBattleState,
     action: PayloadAction<Pokemon>
   ) => {
     state.myTeam.find((p) => p.name === action.payload.name) &&
-      state.myTeam.length > 1 &&
       state.myTeam.splice(
         state.myTeam.findIndex((p) => p.name === action.payload.name),
         1
       );
+    state.currentPokemon = state.myTeam.find((p) => p);
+    state.currentHP = state.currentPokemon ? state.currentPokemon.maxHP : 0;
+  },
+  [BattleActions.faintOpponentTeam.type]: (
+    state: IBattleState,
+    action: PayloadAction<Pokemon>
+  ) => {
+    state.opponentTeam.find((p) => p.name === action.payload.name) &&
+      state.opponentTeam.splice(
+        state.opponentTeam.findIndex((p) => p.name === action.payload.name),
+        1
+      );
+    state.currentOpponent = state.opponentTeam.find((p) => p);
+    state.currentOpponentHP = state.currentOpponent
+      ? state.currentOpponent.maxHP
+      : 0;
   },
   [BattleActions.attack.type]: (
     state: IBattleState,

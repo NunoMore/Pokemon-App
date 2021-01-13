@@ -1,6 +1,7 @@
 .teamDiv {
   text-align: center;
   border-style: solid;
+  max-height: min-content;
 }
 
 .teamGrid {

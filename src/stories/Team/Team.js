@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { BattleActions } from "../../redux/battle.reducer";
 import "./team.css";
 
@@ -8,12 +8,14 @@ import "./team.css";
 export const Team = ({ team }) => {
   const dispatch = useDispatch();
 
+  const fighting = useSelector((state) => state.battleState.fighting);
+
   const image = (pokemon) => (
     <img
       className="teamImg"
       alt=""
       src={pokemon.image}
-      onClick={() => dispatch(BattleActions.removeMyTeam(pokemon))}
+      onClick={() => !fighting && dispatch(BattleActions.faintMyTeam(pokemon))}
     />
   );
 

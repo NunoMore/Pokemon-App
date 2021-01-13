@@ -12,7 +12,9 @@ export const Arena = () => {
   const allPokemon = useSelector((state) => state.homeState.allPokemon);
 
   const currentHP = useSelector((state) => state.battleState.currentHP);
-  const opponentHP = useSelector((state) => state.battleState.opponentHP);
+  const currentOpponentHP = useSelector(
+    (state) => state.battleState.currentOpponentHP
+  );
 
   const myTeam = useSelector((state) => state.battleState.myTeam);
   const opponentTeam = useSelector((state) => state.battleState.opponentTeam);
@@ -44,15 +46,17 @@ export const Arena = () => {
     <Button type={move.type} label={move.name} onClick={() => attack(move)} />
   );
   const attack = (move) => {
-    if (opponentHP <= 0) {
+    const multiplier = currentOpponent.resistant.includes(move.type)
+      ? 0.5
+      : currentOpponent.weaknesses.includes(move.type)
+      ? 2
+      : 1;
+    const damage = move.damage * multiplier;
+    if (opponentTeam.length === 1 && currentOpponentHP - damage <= 0) {
       dispatch(BattleActions.endFight());
+    } else if (currentOpponentHP - damage <= 0) {
+      dispatch(BattleActions.faintOpponentTeam(currentOpponent));
     } else {
-      const multiplier = currentOpponent.resistant.includes(move.type)
-        ? 0.5
-        : currentOpponent.weaknesses.includes(move.type)
-        ? 2
-        : 1;
-      const damage = move.damage * multiplier;
       dispatch(BattleActions.attack(damage, true));
     }
   };
@@ -61,30 +65,32 @@ export const Arena = () => {
 
   return (
     <div>
-      {(currentOpponent && (
+      {(currentOpponent && ( // bug with currentOpponent : when undefined => sets a new team...
         <>
           <div id="oponnent" className="arena">
-            <div className="arenaDiv">
+            <div className="arenaColumn">
               <Team team={opponentTeam} />
               {image(currentOpponent)}
             </div>
-            <div>
+            <div className="arenaColumn">
               {name(currentOpponent)}
-              {healthBar(opponentHP)}
+              {healthBar(currentOpponentHP)}
             </div>
           </div>
-          <div id="player">
-            <div className="arena">
-              <div>
-                {name(currentPokemon)}
-                {healthBar(currentHP)}
-              </div>
-              <div>{image(currentPokemon)}</div>
-              <Team team={myTeam} />
+          <div id="player" className="arena">
+            <div className="arenaColumn">
+              {name(currentPokemon)}
+              {healthBar(currentHP)}
             </div>
-            <div id="moves">
-              {currentPokemon.attacks.fast.map((move) => attackButton(move))}
-              {currentPokemon.attacks.special.map((move) => attackButton(move))}
+            <div className="arenaColumn">
+              {image(currentPokemon)}
+              <Team team={myTeam} />
+              <div id="moves">
+                {currentPokemon.attacks.fast.map((move) => attackButton(move))}
+                {currentPokemon.attacks.special.map((move) =>
+                  attackButton(move)
+                )}
+              </div>
             </div>
           </div>
         </>

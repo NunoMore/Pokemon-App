@@ -6,7 +6,6 @@ import { View } from "./stories/View/View";
 import { Header } from "./stories/Header/Header";
 import { SearchBar } from "./stories/Search/Search";
 import { Arena } from "./stories/Arena/Arena";
-import { Team } from "./stories/Team/Team";
 
 function Home() {
   const filteredPokemon: Pokemon[] = useSelector(

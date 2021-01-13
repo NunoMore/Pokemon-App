@@ -9,6 +9,7 @@ export interface IBattleState {
   currentOpponent: Pokemon | undefined;
   currentOpponentHP: number;
   fighting: boolean;
+  opponentTurn: boolean;
 }
 
 export const BattleInitialState: IBattleState = {
@@ -19,6 +20,7 @@ export const BattleInitialState: IBattleState = {
   currentOpponent: undefined,
   currentPokemon: undefined,
   fighting: false,
+  opponentTurn: false,
 };
 
 export const BattleActionTypes = {
@@ -85,6 +87,7 @@ export const BattleReducer = createReducer(BattleInitialState, {
   },
   [BattleActions.endFight.type]: (state: IBattleState) => {
     state.fighting = false;
+    state.opponentTurn = false;
     state.currentOpponent = undefined;
     state.currentPokemon = undefined;
     state.currentOpponentHP = 0;
@@ -152,6 +155,7 @@ export const BattleReducer = createReducer(BattleInitialState, {
     state: IBattleState,
     action: PayloadAction<{ damage: number; attackOpponent: boolean }>
   ) => {
+    state.opponentTurn = action.payload.attackOpponent;
     action.payload.attackOpponent
       ? (state.currentOpponentHP -= action.payload.damage)
       : (state.currentHP -= action.payload.damage);

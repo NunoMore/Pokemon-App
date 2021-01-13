@@ -66,32 +66,34 @@ export const Arena = () => {
   return (
     <div>
       {(currentOpponent && ( // bug with currentOpponent : when undefined => sets a new team...
-        <div className="bothArenas">
-          <div id="oponnent" className="arena">
-            <div className="arenaColumn">
-              <Team team={opponentTeam} />
-              {image(currentOpponent)}
+        <>
+          <div className="bothArenas">
+            <div id="oponnent" className="arena">
+              <div className="arenaColumn">
+                <Team team={opponentTeam} />
+                {image(currentOpponent)}
+              </div>
+              <div className="arenaColumn">
+                {name(currentOpponent)}
+                {healthBar(currentOpponentHP)}
+              </div>
             </div>
-            <div className="arenaColumn">
-              {name(currentOpponent)}
-              {healthBar(currentOpponentHP)}
+            <div id="player" className="arena">
+              <div className="arenaColumn">
+                {name(currentPokemon)}
+                {healthBar(currentHP)}
+              </div>
+              <div className="arenaColumn">
+                {image(currentPokemon)}
+                <Team team={myTeam} />
+              </div>
             </div>
           </div>
-          <div id="player" className="arena">
-            <div className="arenaColumn">
-              {name(currentPokemon)}
-              {healthBar(currentHP)}
-            </div>
-            <div className="arenaColumn">
-              {image(currentPokemon)}
-              <Team team={myTeam} />
-            </div>
-          </div>
-          <div id="moves">
+          <div className="moves">
             {currentPokemon.attacks.fast.map((move) => attackButton(move))}
             {currentPokemon.attacks.special.map((move) => attackButton(move))}
           </div>
-        </div>
+        </>
       )) ||
         dispatch(BattleActions.setOpponentTeam(newOpponentTeam))}
     </div>

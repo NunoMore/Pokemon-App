@@ -91,7 +91,6 @@ export const BattleReducer = createReducer(BattleInitialState, {
     state.currentHP = 0;
     state.opponentTeam = [];
     state.myTeam = [];
-    
   },
   [BattleActions.chooseOpponent.type]: (
     state: IBattleState,

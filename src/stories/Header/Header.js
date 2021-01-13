@@ -12,7 +12,7 @@ export const Header = ({ fighting, isTeamReady }) => {
   const pokemon_logo =
     "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1280px-International_Pok%C3%A9mon_logo.svg.png";
   return (
-    <div>
+    <div className='headerDiv'>
       <img className="pokemonLogoImg" alt="pokemonLogoImg" src={pokemon_logo} />
       {(fighting && isTeamReady && (
         <Button

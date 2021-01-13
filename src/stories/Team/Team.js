@@ -15,7 +15,10 @@ export const Team = ({ team }) => {
       className="teamImg"
       alt=""
       src={pokemon.image}
-      onClick={() => !fighting && dispatch(BattleActions.faintMyTeam(pokemon))}
+      onClick={() =>
+        (!fighting && dispatch(BattleActions.faintMyTeam(pokemon))) ||
+        dispatch(BattleActions.chooseCurrentPokemon(pokemon))
+      }
     />
   );
 

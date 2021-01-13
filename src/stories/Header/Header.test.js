@@ -19,12 +19,14 @@ describe("renders header component", () => {
     expect(fightText).toBeInTheDocument();
     expect(quitText).not.toBeInTheDocument();
   });
+  
   it("should render button component with quit label", () => {
     render(
       <Provider store={store}>
         <Header fighting={true} />
       </Provider>
     );
+
     const button = document.querySelector("Button");
     const fightText = queryByText(button, "Fight");
     const quitText = queryByText(button, "Quit");

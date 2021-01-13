@@ -5,8 +5,8 @@ import { store } from "../../redux/store";
 import { Team } from "./Team";
 
 describe("renders team component", () => {
-  const pokeomnsInTeam = Math.round(Math.random()) * 5;
-  const fakeTeam = GetFakeTeam(pokeomnsInTeam);
+  const pokemonsInTeam = Math.round(Math.random()) * 5;
+  const fakeTeam = GetFakeTeam(pokemonsInTeam);
 
   it("should render 5 images component", () => {
     render(
@@ -16,6 +16,6 @@ describe("renders team component", () => {
     );
 
     const images = document.querySelectorAll("img");
-    expect(images.length).toEqual(pokeomnsInTeam);
+    expect(images.length).toEqual(pokemonsInTeam);
   });
 });

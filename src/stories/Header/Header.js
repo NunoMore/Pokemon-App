@@ -13,7 +13,7 @@ export const Header = ({ fighting, isTeamReady }) => {
     "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1280px-International_Pok%C3%A9mon_logo.svg.png";
   return (
     <div>
-      <img className="pokemonLogoImg" alt="" src={pokemon_logo} />
+      <img className="pokemonLogoImg" alt="pokemonLogoImg" src={pokemon_logo} />
       {(fighting && isTeamReady && (
         <Button
           label="Quit"
@@ -22,7 +22,7 @@ export const Header = ({ fighting, isTeamReady }) => {
       )) ||
         (isTeamReady && (
           <Button
-            label="FIGHT"
+            label="Fight"
             onClick={() => dispatch(BattleActions.fight())}
           />
         ))}

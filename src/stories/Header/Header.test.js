@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { getByText, queryByText, render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { store } from "../../redux/store";
 import { Header } from "./Header";
@@ -10,8 +10,14 @@ describe("renders header component", () => {
         <Header fighting={false} isTeamReady={true} />
       </Provider>
     );
-    const fightButton = screen.getByText(/fight/i);
-    expect(fightButton).toBeInTheDocument();
+
+    const button = document.querySelector("Button");
+    const fightText = queryByText(button, "Fight");
+    const quitText = queryByText(button, "Quit");
+    const logo = screen.queryByAltText("pokemonLogoImg");
+    expect(logo).toBeInTheDocument();
+    expect(fightText).toBeInTheDocument();
+    expect(quitText).not.toBeInTheDocument();
   });
   it("should render button component with quit label", () => {
     render(
@@ -19,7 +25,12 @@ describe("renders header component", () => {
         <Header fighting={true} />
       </Provider>
     );
-    const quitButton = screen.getByText(/quit/i);
-    expect(quitButton).toBeInTheDocument();
+    const button = document.querySelector("Button");
+    const fightText = queryByText(button, "Fight");
+    const quitText = queryByText(button, "Quit");
+    const logo = screen.queryByAltText("pokemonLogoImg");
+    expect(logo).toBeInTheDocument();
+    expect(fightText).not.toBeInTheDocument();
+    expect(quitText).toBeInTheDocument();
   });
 });
